@@ -11,8 +11,8 @@ df = df.replace(float('nan'), '')
 
 # Perform data wrangling
 def extract_last_order(text):
-    mo = re.match(r'.*[a-zA-Z](#?\d+)$', text)
-    return mo.group(1) if mo else ''
+    matches = re.findall('[a-zA-Z](#?\d+)', text)
+    return matches[-1] if matches else ''
     
 df['My Last Correct Order'] = df.iloc[:, 0].map(extract_last_order)
 
